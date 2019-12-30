@@ -1,0 +1,36 @@
+
+.app-content {
+	margin-top: 12%;
+}
+.grid-content {
+	margin-top: 5%;
+}
+.contact-list-operation {
+	button {
+		display: inline-block;
+		margin-right: 3%;
+		padding: 1%;
+	}
+	.search-input {
+		display: inline-block;
+		margin-right: 3%;
+		padding: 1%;
+	}
+}
+.user-name-info {
+	display: flex;
+	.user-name {
+		align-self: center;
+		margin-left: 3%;
+		font-weight: 600;
+	}
+}
+.card-header-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	.content-name-avatar {
+		width: 75px;
+		height: 75px;
+	}
+}
