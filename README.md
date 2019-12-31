@@ -23,4 +23,11 @@ Use your Favourite package manager `npm` or `yarn` to install dependencies
 
 run `npm start` or `yarn start` from the root directory to run the application.
 
+# Future Enhancement
+
+1. pagination in the contactList table.
+2. option to delete contact
+3. connect with a dynamic data source
+4. Refactor and optimize code for production
+
 ### Note: The code is WIP and I will update the code as and when I get the time
