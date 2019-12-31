@@ -32,7 +32,7 @@ const ContactList = props => {
 
   // yet to be implemented will use for delete
   const selectAllContacts = event => {};
-
+  /* will add pagination soon */
   return (
     <>
       <div className="contact-list">
