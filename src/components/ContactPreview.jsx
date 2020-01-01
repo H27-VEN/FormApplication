@@ -55,4 +55,4 @@ const ContactPreview = props => {
   );
 };
 
-export default ContactPreview;
+export default React.memo(ContactPreview);

@@ -10,9 +10,10 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
 const ContactList = props => {
+  console.log(":: props.list in contactList ::", props.list);
   const [contactListInput, setContactListInput] = useState({
     list: props.list,
-    selectedContact: props.list[0].id
+    selectedContact: props.list.length ? props.list[0].id : null
   });
 
   useEffect(() => {
@@ -93,4 +94,4 @@ const ContactList = props => {
   );
 };
 
-export default ContactList;
+export default React.memo(ContactList);

@@ -4,21 +4,11 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
-import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Drawer from "@material-ui/core/Drawer";
 import SearchIcon from "@material-ui/icons/Search";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined";
-import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
-import PieChartOutlinedIcon from "@material-ui/icons/PieChartOutlined";
-import EventOutlinedIcon from "@material-ui/icons/EventOutlined";
-import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
-import List from "@material-ui/core/List";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import ListItem from "@material-ui/core/ListItem";
 import Snackbar from "@material-ui/core/Snackbar";
+import AppHeader from "./components/AppHeader";
+import AppHeaderTitle from "./components/AppHeaderTitle";
 import ContactList from "./components/ContactList";
 import ContactPreview from "./components/ContactPreview";
 import AddEditContactDetails from "./components/AddEditContactDetails";
@@ -58,7 +48,6 @@ function App() {
   };
 
   const dismissSnackbar = event => {
-    debugger;
     const updatedSnackBar = { ...contactAppState.snackbar, isOpen: false };
     setContactAppState({
       ...contactAppState,
@@ -144,32 +133,9 @@ function App() {
 
   return (
     <>
-      <AppBar position="fixed">
-        <ToolBar />
-      </AppBar>
-      <Drawer variant="permanent">
-        <List>
-          {[
-            HomeOutlinedIcon,
-            PersonOutlineOutlinedIcon,
-            DescriptionOutlinedIcon,
-            PieChartOutlinedIcon,
-            EventOutlinedIcon
-          ].map(Icon => {
-            return (
-              <ListItem button>
-                <Icon />
-              </ListItem>
-            );
-          })}
-        </List>
-      </Drawer>
+      <AppHeader />
       <Container classes={{ root: "app-content" }}>
-        <Typography variant="h3">
-          <PermContactCalendarIcon fontSize="large" />
-          Contacts
-        </Typography>
-        <Typography variant="subtitle1">Welcome to FlatCRM</Typography>
+        <AppHeaderTitle />
         <Grid container spacing={3}>
           <Grid item xs={7}>
             <div className="grid-content">
