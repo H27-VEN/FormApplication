@@ -5,11 +5,13 @@ import PermContactCalendarIcon from "@material-ui/icons/PermContactCalendar";
 const AppHeaderTitle = () => {
   return (
     <>
-      <Typography variant="h3">
-        <PermContactCalendarIcon fontSize="large" />
-        Contacts
-      </Typography>
-      <Typography variant="subtitle1">Welcome to FlatCRM</Typography>
+      <PermContactCalendarIcon classes={{ root: "contact-header-icon" }} />
+      <div className="app-title">
+        <Typography variant="h4">Contacts</Typography>
+        <Typography variant="subtitle1">
+          Welcome to FlatCRM Contact Page
+        </Typography>
+      </div>
     </>
   );
 };

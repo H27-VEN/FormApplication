@@ -1,21 +1,32 @@
-
+/* * {
+  border: 1px solid black;
+} */
 .app-content {
 	margin-top: 12%;
+	box-sizing: border-box;
 }
 .grid-content {
 	margin-top: 5%;
 }
 .contact-list-operation {
-	button {
+	.add-contact {
 		display: inline-block;
-		margin-right: 3%;
+		margin-left: 1%;
 		padding: 1%;
 	}
 	.search-input {
 		display: inline-block;
-		margin-right: 3%;
+		margin-left: 1%;
 		padding: 1%;
 	}
+}
+.app-title {
+	display: inline-block;
+}
+.contact-header-icon {
+	font-size: 3.1875rem !important;
+	margin-right: 1%;
+	vertical-align: super;
 }
 .user-name-info {
 	display: flex;

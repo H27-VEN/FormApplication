@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import EditIcon from "@material-ui/icons/Edit";
 
 const ContactPreview = props => {
   return (
@@ -23,7 +24,7 @@ const ContactPreview = props => {
           <Typography>{props.data.designation}</Typography>
         </div>
         <div className="contact-details">
-          <List>
+          <List dense>
             {Object.keys(props.data)
               .filter(key => key !== "id")
               .map(key => {
@@ -47,6 +48,7 @@ const ContactPreview = props => {
           variant="contained"
           id={props.data.id}
           onClick={props.openInEditMode}
+          startIcon={<EditIcon />}
         >
           Edit Details
         </Button>
