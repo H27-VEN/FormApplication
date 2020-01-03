@@ -61,9 +61,9 @@ const AddEditContactDetails = props => {
         name,
         email,
         phone,
+        designation,
         company,
-        address,
-        designation
+        address
       } = props.contactDetails;
       const firstName = name.split(" ")[0];
       const lastName = name.split(" ")[1];

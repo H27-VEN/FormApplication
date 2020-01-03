@@ -14,7 +14,7 @@ import ContactList from "./components/ContactList";
 import ContactPreview from "./components/ContactPreview";
 import AddEditContactDetails from "./components/AddEditContactDetails";
 import data from "./data";
-import "./styles.scss";
+import "./styles.css";
 
 function App() {
   const [contactAppState, setContactAppState] = useState({
@@ -137,7 +137,7 @@ function App() {
       <AppHeader />
       <Container classes={{ root: "app-content" }}>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <AppHeaderTitle />
           </Grid>
           <Grid classes={{ item: "contact-list-operation" }} item xs={12}>

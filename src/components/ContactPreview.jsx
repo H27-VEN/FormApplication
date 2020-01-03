@@ -5,9 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import EditIcon from "@material-ui/icons/Edit";
 
 const ContactPreview = props => {
@@ -20,26 +17,36 @@ const ContactPreview = props => {
           >{`${props.data.name.split(" ")[0].charAt(0)}${props.data.name
             .split(" ")[1]
             .charAt(0)}`}</Avatar>
+
           <Typography>{props.data.name}</Typography>
           <Typography>{props.data.designation}</Typography>
         </div>
         <div className="contact-details">
-          <List dense>
+          <div>
             {Object.keys(props.data)
               .filter(key => key !== "id")
               .map(key => {
                 return (
-                  <ListItem key={key}>
-                    <ListItemText>{`${key
-                      .charAt(0)
-                      .toUpperCase()}${key.substring(1)}`}</ListItemText>
-                    <ListItemText classes={{ root: "contact-detail-value" }}>
+                  <p key={key}>
+                    <Typography
+                      color="textSecondary"
+                      variant="body1"
+                      component="span"
+                      classes={{ root: "contact-details-key" }}
+                    >
+                      {`${key.charAt(0).toUpperCase()}${key.substring(1)}`}{" "}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      component="span"
+                      classes={{ root: "contact-details-value" }}
+                    >
                       {props.data[key] ? props.data[key] : "No Info Avaliable"}
-                    </ListItemText>
-                  </ListItem>
+                    </Typography>
+                  </p>
                 );
               })}
-          </List>
+          </div>
         </div>
       </CardContent>
       <CardActions>

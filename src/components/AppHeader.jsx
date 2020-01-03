@@ -16,7 +16,7 @@ const AppHeader = () => {
       <AppBar position="fixed">
         <ToolBar />
       </AppBar>
-      <Drawer variant="permanent">
+      <Drawer variant="permanent" classes={{ paper: "fix-drawer" }}>
         <List>
           {[
             HomeOutlinedIcon,

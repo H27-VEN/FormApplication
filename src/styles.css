@@ -1,0 +1,72 @@
+/* * {
+	 border: 1px solid black;
+}
+ */
+.app-content {
+  margin-top: 12%;
+  box-sizing: border-box;
+}
+.grid-content {
+  margin-top: 5%;
+}
+.contact-list-operation .add-contact {
+  display: inline-block;
+  margin-left: 1%;
+  padding: 1%;
+}
+.contact-list-operation .search-input {
+  display: inline-block;
+  margin-left: 1%;
+  padding: 1%;
+}
+.app-title {
+  display: inline-block;
+}
+.contact-header-icon {
+  font-size: 3.1875rem !important;
+  margin-right: 1%;
+  vertical-align: super;
+}
+.user-name-info {
+  display: flex;
+}
+.user-name-info .user-name {
+  align-self: center;
+  margin-left: 3%;
+  font-weight: 600;
+}
+.card-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-header-content .content-name-avatar {
+  width: 75px;
+  height: 75px;
+  margin-bottom: 2%;
+}
+
+.contact-details {
+  margin-top: 7%;
+  margin-left: 3%;
+}
+
+.contact-details div p {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.contact-details .contact-details-key {
+  display: inline-block;
+  width: 50%;
+}
+
+.contact-details .contact-details-value {
+  display: inline-block;
+  width: 50%;
+}
+
+.fix-drawer {
+  justify-content: center;
+}
