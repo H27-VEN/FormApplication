@@ -1,7 +1,8 @@
 /* * {
-  border: 1px solid black;
-} */
-.app-content {
+	 border: 1px solid black;
+}
+ */
+ .app-content {
 	margin-top: 12%;
 	box-sizing: border-box;
 }
@@ -43,5 +44,28 @@
 	.content-name-avatar {
 		width: 75px;
 		height: 75px;
+		margin-bottom: 2%;
 	}
+}
+.contact-details {
+	margin-top: 7%;
+	margin-left: 3%;
+	div {
+		p {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+	}
+	.contact-details-key {
+		display: inline-block;
+		width: 50%;
+	}
+	.contact-details-value {
+		display: inline-block;
+		width: 50%;
+	}
+}
+.fix-drawer {
+	justify-content: center;
 }

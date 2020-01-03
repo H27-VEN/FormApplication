@@ -14,7 +14,7 @@ import ContactList from "./components/ContactList";
 import ContactPreview from "./components/ContactPreview";
 import AddEditContactDetails from "./components/AddEditContactDetails";
 import data from "./data";
-import "./styles.css";
+import "./styles.scss";
 
 function App() {
   const [contactAppState, setContactAppState] = useState({
