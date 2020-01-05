@@ -6,6 +6,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
+import TableFooter from "@material-ui/core/TableFooter";
+import TablePagination from "@material-ui/core/TablePagination";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
@@ -13,15 +15,39 @@ const ContactList = props => {
   console.log(":: props.list in contactList ::", props.list);
   const [contactListInput, setContactListInput] = useState({
     list: props.list,
+    rows: props.list.length,
+    rowsPerPage: 5,
+    page: 0,
     selectedContact: props.list.length ? props.list[0].id : null
   });
 
   useEffect(() => {
     setContactListInput(currentState => {
-      const updatedState = { ...currentState, list: props.list };
+      const updatedState = {
+        ...currentState,
+        list: props.list,
+        rows: props.list.length,
+        rowsPerPage: 5,
+        page: 0
+      };
       return updatedState;
     });
-  }, [props]);
+  }, [props.list]);
+
+  const handlePageChange = (event, page) => {
+    setContactListInput({
+      ...contactListInput,
+      page
+    });
+  };
+
+  const handleRowPerPageChange = event => {
+    setContactListInput({
+      ...contactListInput,
+      rowsPerPage: +event.target.value,
+      page: 0
+    });
+  };
 
   const handleContactSelect = event => {
     setContactListInput({
@@ -55,12 +81,20 @@ const ContactList = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {contactListInput.list.map((contact, index) => (
+              {(contactListInput.rowsPerPage < 0
+                ? contactListInput.list
+                : contactListInput.list.slice(
+                    contactListInput.page * contactListInput.rowsPerPage,
+                    contactListInput.page * contactListInput.rowsPerPage +
+                      contactListInput.rowsPerPage
+                  )
+              ).map(contact => (
                 <TableRow
                   hover
                   role="checkbox"
                   key={contact.id}
                   id={contact.id}
+                  classes={{ hover: "table-row-hover" }}
                   selected={contact.id === contactListInput.selectedContact}
                   onClick={handleContactSelect}
                 >
@@ -87,6 +121,31 @@ const ContactList = props => {
                 </TableRow>
               ))}
             </TableBody>
+            {contactListInput.rows >= 5 ? (
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 }
+                    ]}
+                    count={contactListInput.rows}
+                    rowsPerPage={contactListInput.rowsPerPage}
+                    page={contactListInput.page}
+                    SelectProps={{
+                      inputProps: { "aria-label": "rows per page" },
+                      native: true
+                    }}
+                    onChangePage={handlePageChange}
+                    onChangeRowsPerPage={handleRowPerPageChange}
+                  />
+                </TableRow>
+              </TableFooter>
+            ) : (
+              ""
+            )}
           </Table>
         </TableContainer>
       </div>

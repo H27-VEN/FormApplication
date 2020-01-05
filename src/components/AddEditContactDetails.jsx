@@ -134,9 +134,9 @@ const AddEditContactDetails = props => {
       name: `${firstName} ${lastName}`,
       email,
       phone,
+      designation,
       company: company ? company : "",
-      address,
-      designation
+      address
     };
     console.log("::newContactDetails:: ", newContactDetails);
     resetForm();
