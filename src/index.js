@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import {
+  createMuiTheme,
+  responsiveFontSizes,
+  ThemeProvider
+} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
 import SearchIcon from "@material-ui/icons/Search";
@@ -40,6 +45,8 @@ function App() {
     isInitialWarningSnackbarOpen: true,
     operationSnackbar: false
   });
+
+  const theme = responsiveFontSizes(createMuiTheme());
 
   const openAddContactModal = () => {
     setContactAppState({
@@ -134,104 +141,109 @@ function App() {
 
   return (
     <>
-      <AppHeader />
-      <Container classes={{ root: "app-content" }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <AppHeaderTitle />
-          </Grid>
-          <Grid classes={{ item: "contact-list-operation" }} item xs={12}>
-            <div className="search-input">
-              <Input
-                id="contact-list-search"
-                type="text"
-                placeholder="Search contacts"
-                value={contactAppState.search}
-                onChange={handleSearchInput}
-                endAdornment={
-                  <InputAdornment>
-                    <SearchIcon />
-                  </InputAdornment>
+      <ThemeProvider theme={theme}>
+        <AppHeader />
+        <Container classes={{ root: "app-content" }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <AppHeaderTitle />
+            </Grid>
+            <Grid classes={{ item: "contact-list-operation" }} item xs={12}>
+              <div className="search-input">
+                <Input
+                  id="contact-list-search"
+                  type="text"
+                  placeholder="Search contacts"
+                  value={contactAppState.search}
+                  onChange={handleSearchInput}
+                  endAdornment={
+                    <InputAdornment>
+                      <SearchIcon />
+                    </InputAdornment>
+                  }
+                />
+              </div>
+              <div className="add-contact">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={openAddContactModal}
+                  startIcon={<AddIcon />}
+                >
+                  Add Contact
+                </Button>
+              </div>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <ContactList
+                list={
+                  !contactAppState.search
+                    ? contactAppState.list
+                    : contactAppState.filteredList
+                }
+                removeContactDetails={removeContactDetails}
+                selectedContactDetails={selectedContactDetails}
+              />
+              <AddEditContactDetails
+                isOpen={contactAppState.isAddEditContactModalOpen}
+                closeModal={closeAddContactModal}
+                saveContactDetails={saveContactDetails}
+                contactDetails={
+                  contactAppState.openModalInEditMode
+                    ? contactAppState.contactDetails
+                    : null
                 }
               />
-            </div>
-            <div className="add-contact">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={openAddContactModal}
-                startIcon={<AddIcon />}
-              >
-                Add Contact
-              </Button>
-            </div>
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <ContactList
-              list={
-                !contactAppState.search
-                  ? contactAppState.list
-                  : contactAppState.filteredList
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <div className="grid-content"> */}
+              <ContactPreview
+                data={contactAppState.contactDetails}
+                openInEditMode={openInEditMode}
+              />
+              {/* </div> */}
+            </Grid>
+            {console.log(
+              "contactAppState.snackbar: ",
+              contactAppState.snackbar
+            )}
+            <Snackbar
+              open={contactAppState.snackbar.isOpen}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center"
+              }}
+              autoHideDuration={
+                contactAppState.snackbar[contactAppState.snackbar.type]
+                  .autoHideDuration
               }
-              removeContactDetails={removeContactDetails}
-              selectedContactDetails={selectedContactDetails}
-            />
-            <AddEditContactDetails
-              isOpen={contactAppState.isAddEditContactModalOpen}
-              closeModal={closeAddContactModal}
-              saveContactDetails={saveContactDetails}
-              contactDetails={
-                contactAppState.openModalInEditMode
-                  ? contactAppState.contactDetails
-                  : null
+              name={contactAppState.snackbar.type}
+              onClose={dismissSnackbar}
+              message={
+                <div id="message-id">
+                  <span>
+                    {
+                      contactAppState.snackbar[contactAppState.snackbar.type]
+                        .message
+                    }
+                  </span>
+                </div>
               }
+              action={[
+                <Button
+                  key="undo"
+                  color="secondary"
+                  size="small"
+                  onClick={dismissSnackbar}
+                >
+                  CLOSE
+                </Button>
+              ]}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            {/* <div className="grid-content"> */}
-            <ContactPreview
-              data={contactAppState.contactDetails}
-              openInEditMode={openInEditMode}
-            />
-            {/* </div> */}
-          </Grid>
-          {console.log("contactAppState.snackbar: ", contactAppState.snackbar)}
-          <Snackbar
-            open={contactAppState.snackbar.isOpen}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "center"
-            }}
-            autoHideDuration={
-              contactAppState.snackbar[contactAppState.snackbar.type]
-                .autoHideDuration
-            }
-            name={contactAppState.snackbar.type}
-            onClose={dismissSnackbar}
-            message={
-              <div id="message-id">
-                <span>
-                  {
-                    contactAppState.snackbar[contactAppState.snackbar.type]
-                      .message
-                  }
-                </span>
-              </div>
-            }
-            action={[
-              <Button
-                key="undo"
-                color="secondary"
-                size="small"
-                onClick={dismissSnackbar}
-              >
-                CLOSE
-              </Button>
-            ]}
-          />
-        </Grid>
-      </Container>
+        </Container>
+      </ThemeProvider>
     </>
   );
 }

@@ -89,8 +89,8 @@ const AddEditContactDetails = props => {
     }
   }, [props]);
 
-  const handleValidation = event => {
-    const { name, value } = event.target;
+  const handleValidation = (name, value) => {
+    //const { name, value } = event.target;
     let isError = false;
     switch (name) {
       case "firstName":
@@ -106,15 +106,7 @@ const AddEditContactDetails = props => {
         break;
       default:
     }
-    const updatedValErrors = { ...contactDetails.valErrors, [name]: isError };
-    console.log("updatedValErrors: ", updatedValErrors);
-    setContactDetails({
-      ...contactDetails,
-      valErrors: updatedValErrors,
-      saveButtonDisabled: !Object.values(updatedValErrors).every(
-        val => val === false
-      )
-    });
+    return isError;
   };
 
   const handleSaveContactDetails = () => {
@@ -146,7 +138,18 @@ const AddEditContactDetails = props => {
 
   const handleContactInput = event => {
     const { name, value } = event.target;
-    setContactDetails({ ...contactDetails, [name]: value });
+    const updatedValErrors = {
+      ...contactDetails.valErrors,
+      [name]: handleValidation(name, value)
+    };
+    setContactDetails({
+      ...contactDetails,
+      [name]: value,
+      valErrors: updatedValErrors,
+      saveButtonDisabled: !Object.values(updatedValErrors).every(
+        val => val === false
+      )
+    });
   };
 
   return (
@@ -156,7 +159,7 @@ const AddEditContactDetails = props => {
       aria-labelledby="form-dialog-title"
       fullWidth
     >
-      {console.log(":: contactDetails in render ::", contactDetails)}
+      {/* {console.log(":: contactDetails in render ::", contactDetails)} */}
       <DialogTitle id="form-dialog-title">
         {contactDetails.formTitle}
       </DialogTitle>
@@ -169,8 +172,8 @@ const AddEditContactDetails = props => {
             label="First Name"
             type="text"
             value={contactDetails.firstName}
+            inputProps={{ maxLength: 20 }}
             onChange={handleContactInput}
-            onBlur={handleValidation}
             error={contactDetails.valErrors["firstName"]}
             helperText={
               contactDetails.valErrors["firstName"]
@@ -188,8 +191,8 @@ const AddEditContactDetails = props => {
             label="Last Name"
             type="text"
             value={contactDetails.lastName}
+            inputProps={{ maxLength: 20 }}
             onChange={handleContactInput}
-            onBlur={handleValidation}
             error={contactDetails.valErrors["lastName"]}
             helperText={
               contactDetails.valErrors["lastName"]
@@ -206,8 +209,8 @@ const AddEditContactDetails = props => {
             label="Email Address"
             type="email"
             value={contactDetails.email}
+            inputProps={{ maxLength: 255 }}
             onChange={handleContactInput}
-            onBlur={handleValidation}
             error={contactDetails.valErrors["email"]}
             helperText={
               contactDetails.valErrors["email"]
@@ -225,7 +228,6 @@ const AddEditContactDetails = props => {
             type="phone"
             value={contactDetails.phone}
             onChange={handleContactInput}
-            onBlur={handleValidation}
             error={contactDetails.valErrors["phone"]}
             helperText={
               contactDetails.valErrors["phone"]
@@ -243,6 +245,7 @@ const AddEditContactDetails = props => {
             label="Company"
             type="text"
             value={contactDetails.company}
+            inputProps={{ maxLength: 20 }}
             onChange={handleContactInput}
           />
         </FormGroup>
@@ -254,6 +257,7 @@ const AddEditContactDetails = props => {
             label="Designation"
             type="text"
             value={contactDetails.designation}
+            inputProps={{ maxLength: 20 }}
             onChange={handleContactInput}
           />
         </FormGroup>
@@ -265,8 +269,8 @@ const AddEditContactDetails = props => {
             label="Address"
             type="text"
             value={contactDetails.address}
+            inputProps={{ maxLength: 20 }}
             onChange={handleContactInput}
-            onBlur={handleValidation}
             error={contactDetails.valErrors["address"]}
             helperText={
               contactDetails.valErrors["address"]
