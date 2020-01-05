@@ -2,7 +2,7 @@ Basic Form Application using React and Material UI.
 
 # Demo
 
-https://7x9r9.csb.app/
+https://mr6z7.csb.app/
 
 # Find Installation Boring
 
